@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Check declared WordPress and PHP compatibility for WordPress.org plugins.">
+  <title>WordPress Plugin Compatibility Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <p class="eyebrow">WordPress.org Plugin Metadata Checker</p>
+      <h1>Plugin Compatibility Checker</h1>
+      <p class="intro">
+        Check a plugin’s declared WordPress and PHP requirements before you update it.
+      </p>
+    </header>
+
+    <section class="card" aria-labelledby="checker-heading">
+      <h2 id="checker-heading">Check a plugin</h2>
+
+      <form id="compatibilityForm" novalidate>
+        <div class="field full-width">
+          <label for="pluginQuery">Plugin name or slug</label>
+          <div class="input-group">
+            <input
+              id="pluginQuery"
+              name="pluginQuery"
+              type="text"
+              placeholder="Example: WooCommerce or woocommerce"
+              autocomplete="off"
+              required
+            >
+            <button type="button" id="searchButton">Search</button>
+          </div>
+          <small>
+            Enter a plugin name to search, or enter its WordPress.org slug.
+          </small>
+        </div>
+
+        <div id="searchResults" class="search-results hidden" aria-live="polite"></div>
+
+        <div class="field">
+          <label for="wordpressVersion">Target WordPress version</label>
+          <select id="wordpressVersion" name="wordpressVersion" required>
+            <option value="">Select WordPress version</option>
+            <option value="3.7">3.7</option>
+            <option value="3.8">3.8</option>
+            <option value="3.9">3.9</option>
+            <option value="4.0">4.0</option>
+            <option value="4.1">4.1</option>
+            <option value="4.2">4.2</option>
+            <option value="4.3">4.3</option>
+            <option value="4.4">4.4</option>
+            <option value="4.5">4.5</option>
+            <option value="4.6">4.6</option>
+            <option value="4.7">4.7</option>
+            <option value="4.8">4.8</option>
+            <option value="4.9">4.9</option>
+            <option value="5.0">5.0</option>
+            <option value="5.1">5.1</option>
+            <option value="5.2">5.2</option>
+            <option value="5.3">5.3</option>
+            <option value="5.4">5.4</option>
+            <option value="5.5">5.5</option>
+            <option value="5.6">5.6</option>
+            <option value="5.7">5.7</option>
+            <option value="5.8">5.8</option>
+            <option value="5.9">5.9</option>
+            <option value="6.0">6.0</option>
+            <option value="6.1">6.1</option>
+            <option value="6.2">6.2</option>
+            <option value="6.3">6.3</option>
+            <option value="6.4">6.4</option>
+            <option value="6.5">6.5</option>
+            <option value="6.6">6.6</option>
+            <option value="6.7">6.7</option>
+            <option value="6.8">6.8</option>
+            <option value="6.9">6.9</option>
+            <option value="7.0">7.0</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="phpVersion">Server PHP version</label>
+          <select id="phpVersion" name="phpVersion" required>
+            <option value="">Select PHP version</option>
+            <option value="5.2">5.2</option>
+            <option value="5.3">5.3</option>
+            <option value="5.4">5.4</option>
+            <option value="5.5">5.5</option>
+            <option value="5.6">5.6</option>
+            <option value="7.0">7.0</option>
+            <option value="7.1">7.1</option>
+            <option value="7.2">7.2</option>
+            <option value="7.3">7.3</option>
+            <option value="7.4">7.4</option>
+            <option value="8.0">8.0</option>
+            <option value="8.1">8.1</option>
+            <option value="8.2">8.2</option>
+            <option value="8.3">8.3</option>
+            <option value="8.4">8.4</option>
+            <option value="8.5">8.5</option>
+          </select>
+        </div>
+
+        <div class="field full-width selected-plugin">
+          <label>Selected plugin</label>
+          <div id="selectedPlugin" class="selected-plugin-box">
+            Search and select a WordPress.org plugin first.
+          </div>
+        </div>
+
+        <div class="field full-width action-row">
+          <button type="submit" id="checkButton" class="primary-button">
+            Check compatibility
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section id="statusArea" class="status-area" aria-live="polite"></section>
+
+    <section id="resultArea" class="result-area hidden" aria-live="polite"></section>
+
+    <section class="card note-card">
+      <h2>How this result works</h2>
+      <ul>
+        <li><strong>PASS:</strong> Your selected WordPress and PHP versions meet the plugin’s declared requirements.</li>
+        <li><strong>WARNING:</strong> The selected WordPress version is newer than the plugin’s declared “Tested up to” version.</li>
+        <li><strong>FAIL:</strong> Your selected WordPress or PHP version is below the plugin’s declared minimum requirement.</li>
+        <li><strong>Important:</strong> This checks public WordPress.org metadata only. Always test updates on staging before updating a production website.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Uses public metadata from the WordPress.org Plugins API.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
